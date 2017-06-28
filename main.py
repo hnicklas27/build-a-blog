@@ -18,31 +18,26 @@ class Blog(db.Model):
         self.title = title
 
 
-@app.route('/newpost', methods=['POST', 'GET'])
+@app.route('/newpost', methods=['POST'])
 def newpost():
-
-    if request.method == 'POST':
-        name = request.form['name']
-        blog = request.form['blog']
-        new_post = Blog(name,blog)
+    name = request.form['name']
+    entry = request.form['entry']
+    error = ''
+    if name == '' or entry == '':
+        error = 'Please enter text'
+        return render_template('newpost.html', error=error)
+    else:
+        new_post = Blog(name,entry)
         db.session.add(new_post)
         db.session.commit()
-
-    blogs = Blog.query.all()
-    return render_template('blog.html',title=title, 
-        name=name , blog=blog)
 
 
 @app.route('/blog', methods=['POST'])
 def blogposts():
+    blogs = Blog.query.all()
+    return render_template('blog.html',title=title, 
+        name=name , body=body)
 
-    task_id = int(request.form['task-id'])
-    task = Task.query.get(task_id)
-    task.completed = True
-    db.session.add(task)
-    db.session.commit()
-
-    return redirect('/')
 
 @app.route('/', methods=['POST','GET']) 
 def index():

@@ -7,10 +7,12 @@
             Entry Title:
             <input type="text" name='name' value="{{blog.title}}"/>
         </label>
+        <p>{{error}}</p>
         <label>
             New Blog Content:
-            <input type="text" name='blog' value="{{blog.body}}" />
+            <input type="text" name='body' value="{{blog.body}}" />
         </label>
+        <p>{{error}}</p>
         <input type ="submit" value='Add Entry' />
     </form>            
 
