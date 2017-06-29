@@ -18,8 +18,9 @@ class Blog(db.Model):
         self.title = title
 
 
-@app.route('/newpost', methods=['POST'])
+@app.route('/newpost', methods=['GET','POST'])
 def newpost():
+    if methods == 'POST'
     name = request.form['name']
     entry = request.form['entry']
     error = ''
@@ -32,14 +33,14 @@ def newpost():
         db.session.commit()
 
 
-@app.route('/blog', methods=['POST'])
+@app.route('/blog', methods=['GET'])
 def blogposts():
     blogs = Blog.query.all()
     return render_template('blog.html',title=title, 
         name=name , body=body)
 
 
-@app.route('/', methods=['POST','GET']) 
+@app.route('/', methods=['GET']) 
 def index():
     return redirect('/blog')   
 
