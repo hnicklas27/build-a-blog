@@ -20,17 +20,17 @@ class Blog(db.Model):
 
 @app.route('/newpost', methods=['GET','POST'])
 def newpost():
-    if methods == 'POST'
-    name = request.form['name']
-    entry = request.form['entry']
-    error = ''
-    if name == '' or entry == '':
-        error = 'Please enter text'
-        return render_template('newpost.html', error=error)
-    else:
-        new_post = Blog(name,entry)
-        db.session.add(new_post)
-        db.session.commit()
+    #if methods is POST
+        name = request.form['name']
+        entry = request.form['entry']
+        error = ''
+        if name == '' or entry == '':
+            error = 'Please enter text'
+            return render_template('newpost.html', error=error)
+        else:
+            new_post = Blog(name,entry)
+            db.session.add(new_post)
+            db.session.commit()
 
 
 @app.route('/blog', methods=['GET'])
